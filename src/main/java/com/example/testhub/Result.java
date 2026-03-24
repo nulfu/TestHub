@@ -1,4 +1,4 @@
-package com.example.testhub.domain;
+package com.example.testhub;
 
 public enum Result {
 

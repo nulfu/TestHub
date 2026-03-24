@@ -1,4 +1,4 @@
-package com.example.testhub.domain;
+package com.example.testhub;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -22,5 +22,9 @@ public class TestRun {
         this.versionId = versionId;
         this.result = result;
         this.executedAt = executedAt;
+        Objects.requireNonNull(releaseId);
+        Objects.requireNonNull(versionId);
+        Objects.requireNonNull(result);
+        Objects.requireNonNull(executedAt);
     }
 }

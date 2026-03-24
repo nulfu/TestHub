@@ -3,12 +3,12 @@ package com.example.testhub;
 @Service
 public class TestExecutionApplicationService {
 
-    private final ReleaseRepositpry releaseRepository;
-    private final TestRunRepository testRunRepositpry;
+    private final ReleaseRepository releaseRepository;
+    private final TestRunRepository testRunRepository;
 
     public TestExecutionApplicationService(
         ReleaseRepository releaseRepository,
-        TestRunRepositpry testRunRepository
+        TestRunRepository testRunRepository
     ) {
         this.releaseRepository = releaseRepository;
         this.testRunRepository = testRunRepository;

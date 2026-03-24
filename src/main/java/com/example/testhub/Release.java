@@ -1,6 +1,7 @@
 package com.example.testhub;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Release {
 
@@ -9,17 +10,17 @@ public class Release {
 
     private final List<ReleaseCase> cases = new ArrayList<>();
 
-    public void updateCaseResult(TestCaseVersionId versionId, Result result){
+    public void recordExecution(TestCaseVersionId versionId, Result result){
 
         ReleaseCase target = cases.stream()
             .filter(c -> c.isFor(versionId))
             .findFirst()
             .orElseThrow(() -> new IllegalArgumentException("case not found"));
 
-        target.updateResult(result);
+        target.recordExecution(result);
     }
 
-    public double calculateProgress(){
+    public double calculateProgressRatio(){
 
         long completed = cases.stream()
             .filter(ReleaseCase::isCompleted)

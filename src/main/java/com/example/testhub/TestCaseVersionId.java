@@ -1,4 +1,4 @@
-package com.example.testhub.domain;
+package com.example.testhub;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -33,7 +33,7 @@ public class TestCaseVersionId {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof TestCaseVetsionId)) return false;
+        if (!(o instanceof TestCaseVersionId)) return false;
         TestCaseVersionId that = (TestCaseVersionId) o;
         return value.equals(that.value);
     }
