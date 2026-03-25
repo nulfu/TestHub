@@ -1,5 +1,12 @@
 package com.example.testhub;
 
+import java.time.LocalDateTime;
+
+import org.springframework.stereotype.Service;
+
+import com.example.testhub.domain.repository.ReleaseRepository;
+import com.example.testhub.domain.repository.TestRunRepository;
+
 @Service
 public class TestExecutionApplicationService {
 
@@ -23,15 +30,12 @@ public class TestExecutionApplicationService {
 
         Release release = releaseRepository.find(releaseId);
 
-        TestRun run = new TestRun(
-            releaseId,
+        release.recordExecution(
             versionId,
             result,
             LocalDateTime.now()
         );
 
-        testRunRepository.save(run);
-        release.updateCaseResult(versionId, result);
         releaseRepository.save(release);
     }
     
