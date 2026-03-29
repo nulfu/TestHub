@@ -6,4 +6,6 @@ public interface TestRunRepository {
 
     void save(TestRun testrun);
 
+    List<TestRun> findByReleaseId(ReleaseId releaseId);
+    
 }
