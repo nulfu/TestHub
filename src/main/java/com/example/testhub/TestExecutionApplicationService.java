@@ -30,11 +30,16 @@ public class TestExecutionApplicationService {
 
         Release release = releaseRepository.find(releaseId);
 
-        release.recordExecution(
+        release.updateCaseResult(versionId, result);
+
+        TestRun run = new TestRun(
+            releaseId,
             versionId,
             result,
             LocalDateTime.now()
         );
+
+        testRunRepository.save(run);
 
         releaseRepository.save(release);
     }
