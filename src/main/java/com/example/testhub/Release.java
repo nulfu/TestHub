@@ -1,8 +1,3 @@
-package com.example.testhub;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-
 public class Release {
 
     private final ReleaseId id;
@@ -10,27 +5,27 @@ public class Release {
 
     private final List<ReleaseCase> cases = new ArrayList<>();
 
+    public Release(
+        ReleaseId id,
+        ProjectId projectId
+    ) {
+        this.id = id;
+        this.projectId = projectId;
+    }
+
     public void recordExecution(
         TestCaseVersionId versionId,
-        Result result,
-        LocalDateTime executedAt
+        Result result
     ){
 
         ReleaseCase target = cases.stream()
             .filter(c -> c.isFor(versionId))
             .findFirst()
-            .orElseThrow(() -> new IllegalArgumentException("Version not included in this release"));
+            .orElseThrow(() ->
+                new IllegalArgumentException("Version not included in this release")
+            );
 
         target.recordExecution(result);
-
-        TestRun run = new TestRun(
-            id,
-            versionId,
-            result,
-            executedAt
-        );
-
-        runs.add(run);
     }
 
     public double calculateProgressRatio(){
@@ -40,5 +35,21 @@ public class Release {
             .count();
 
         return (double) completed / cases.size();
+    }
+
+    public void addCase(ReleaseCase c){
+        cases.add(c);
+    }
+
+    public List<ReleaseCase> getCases(){
+        return cases;
+    }
+
+    public ReleaseId getId(){
+        return id;
+    }
+
+    public ProjectId getProjectId(){
+        return projectId;
     }
 }
