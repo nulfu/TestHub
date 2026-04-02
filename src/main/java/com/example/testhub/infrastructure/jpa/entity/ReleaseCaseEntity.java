@@ -20,32 +20,23 @@ public class ReleaseCaseEntity {
     @JoinColumn(name = "release_id")
     private ReleaseEntity release;
 
-    protected ReleaseCaseEntity() {
-    }
+    protected ReleaseCaseEntity(){}
 
     public ReleaseCaseEntity(
         UUID id,
         UUID versionId,
         Result latestResult
-    ) {
+    ){
         this.id = id;
         this.versionId = versionId;
         this.latestResult = latestResult;
     }
 
-    public UUID getId() {
-        return id;
-    }
-
-    public UUID getVersionId() {
-        return versionId;
-    }
-
-    public Result getLatestResult() {
-        return latestResult;
-    }
-
-    public void setRelease(ReleaseEntity release) {
+    public void setRelease(ReleaseEntity release){
         this.release = release;
     }
+
+    public UUID getId(){ return id; }
+    public UUID getVersionId(){ return versionId; }
+    public Result getLatestResult(){ return latestResult; }
 }

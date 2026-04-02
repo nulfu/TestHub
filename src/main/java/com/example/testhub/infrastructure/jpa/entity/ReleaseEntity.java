@@ -23,8 +23,7 @@ public class ReleaseEntity {
     )
     private List<ReleaseCaseEntity> cases = new ArrayList<>();
 
-    protected ReleaseEntity() {
-    }
+    protected ReleaseEntity() {}
 
     public ReleaseEntity(UUID id, UUID projectId) {
         this.id = id;
