@@ -1,9 +1,9 @@
 package com.example.testhub.domain.testrun;
 
-import java.time.LocalDateTime;
-import java.util.Objects;
-
+import com.example.testhub.domain.release.ReleaseId;
 import com.example.testhub.domain.testcase.TestCaseVersionId;
+
+import java.time.LocalDateTime;
 
 public class TestRun {
 
@@ -18,15 +18,32 @@ public class TestRun {
         TestCaseVersionId versionId,
         Result result,
         LocalDateTime executedAt
-    ) {
+    ){
+
+        if(releaseId == null) throw new IllegalArgumentException();
+        if(versionId == null) throw new IllegalArgumentException();
+        if(result == null) throw new IllegalArgumentException();
+
         this.id = TestRunId.newId();
         this.releaseId = releaseId;
         this.versionId = versionId;
         this.result = result;
         this.executedAt = executedAt;
-        Objects.requireNonNull(releaseId);
-        Objects.requireNonNull(versionId);
-        Objects.requireNonNull(result);
-        Objects.requireNonNull(executedAt);
+    }
+
+    public ReleaseId getReleaseId(){
+        return releaseId;
+    }
+
+    public TestCaseVersionId getVersionId(){
+        return versionId;
+    }
+
+    public Result getResult(){
+        return result;
+    }
+
+    public LocalDateTime getExecutedAt(){
+        return executedAt;
     }
 }

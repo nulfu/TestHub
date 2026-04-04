@@ -1,15 +1,13 @@
 package com.example.testhub.application.execution;
 
-import java.time.LocalDateTime;
+import com.example.testhub.domain.release.*;
+import com.example.testhub.domain.testrun.*;
+import com.example.testhub.domain.testcase.TestCaseVersionId;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.example.testhub.domain.release.Release;
-import com.example.testhub.domain.release.ReleaseRepository;
-import com.example.testhub.domain.testcase.TestCaseVersionId;
-import com.example.testhub.domain.testrun.Result;
-import com.example.testhub.domain.testrun.TestRun;
-import com.example.testhub.domain.testrun.TestRunRepository;
+import java.time.LocalDateTime;
 
 @Service
 public class TestExecutionApplicationService {
@@ -20,7 +18,7 @@ public class TestExecutionApplicationService {
     public TestExecutionApplicationService(
         ReleaseRepository releaseRepository,
         TestRunRepository testRunRepository
-    ) {
+    ){
         this.releaseRepository = releaseRepository;
         this.testRunRepository = testRunRepository;
     }
@@ -30,22 +28,29 @@ public class TestExecutionApplicationService {
         ReleaseId releaseId,
         TestCaseVersionId versionId,
         Result result
-    ) {
+    ){
 
-        Release release = releaseRepository.find(releaseId);
+        Release release = releaseRepository
+            .findById(releaseId)
+            .orElseThrow(() -> new RuntimeException("Release not found"));
 
-        release.updateCaseResult(versionId, result);
+        LocalDateTime now = LocalDateTime.now();
 
         TestRun run = new TestRun(
             releaseId,
             versionId,
             result,
-            LocalDateTime.now()
+            now
         );
 
         testRunRepository.save(run);
 
+        release.recordExecution(
+            versionId,
+            result,
+            now
+        );
+
         releaseRepository.save(release);
     }
-    
 }

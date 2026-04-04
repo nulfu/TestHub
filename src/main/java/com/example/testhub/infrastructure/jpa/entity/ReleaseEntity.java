@@ -1,9 +1,7 @@
 package com.example.testhub.infrastructure.jpa.entity;
 
 import jakarta.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "releases")

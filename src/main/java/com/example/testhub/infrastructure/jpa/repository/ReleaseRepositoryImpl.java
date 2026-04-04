@@ -9,11 +9,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ReleaseRepositoryImpl implements ReleaseRepository {
 
-    private final ReleaseJpaRepository jpaRepository;
+    private final JpaReleaseRepository jpaRepository;
     private final ReleaseMapper mapper;
 
     public ReleaseRepositoryImpl(
-        ReleaseJpaRepository jpaRepository,
+        JpaReleaseRepository jpaRepository,
         ReleaseMapper mapper
     ){
         this.jpaRepository = jpaRepository;

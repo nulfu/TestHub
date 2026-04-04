@@ -3,7 +3,9 @@ package com.example.testhub.domain.testrun;
 public enum Result {
 
     PASS,
-    FAIL;
+    FAIL,
+    BLOCKED,
+    NOT_EXECUTED;
 
     public boolean isPass() {
         return this == PASS;

@@ -7,38 +7,31 @@ public class ReleaseCaseId {
 
     private final UUID value;
 
-    public ReleaseCaseId(UUID value) {
-
-        if (value == null) {
-            throw new IllegalArgumentException("ReleaseCaseId cannot be null");
+    public ReleaseCaseId(UUID value){
+        if(value == null){
+            throw new IllegalArgumentException("ReleaseCaseId must not be null");
         }
-
         this.value = value;
     }
 
-    public static ReleaseCaseId newId() {
+    public static ReleaseCaseId newId(){
         return new ReleaseCaseId(UUID.randomUUID());
     }
 
-    public UUID getValue() {
+    public UUID getValue(){
         return value;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof ReleaseCaseId)) return false;
+    public boolean equals(Object o){
+        if(this == o) return true;
+        if(!(o instanceof ReleaseCaseId)) return false;
         ReleaseCaseId that = (ReleaseCaseId) o;
         return value.equals(that.value);
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode(){
         return Objects.hash(value);
-    }
-
-    @Override
-    public String toString() {
-        return value.toString();
     }
 }

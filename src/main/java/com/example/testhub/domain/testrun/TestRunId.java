@@ -7,38 +7,28 @@ public class TestRunId {
 
     private final UUID value;
 
-    private TestRunId(UUID value) {
-
-        if (value == null) {
-            throw new IllegalArgumentException("TestRunId cannot be null");
-        }
-
+    public TestRunId(UUID value){
         this.value = value;
     }
 
-    public static TestRunId newId() {
+    public static TestRunId newId(){
         return new TestRunId(UUID.randomUUID());
     }
 
-    public UUID getValue() {
+    public UUID getValue(){
         return value;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof TestRunId)) return false;
+    public boolean equals(Object o){
+        if(this == o) return true;
+        if(!(o instanceof TestRunId)) return false;
         TestRunId that = (TestRunId) o;
         return value.equals(that.value);
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode(){
         return Objects.hash(value);
-    }
-
-    @Override
-    public String toString() {
-        return value.toString();
     }
 }
