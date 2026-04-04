@@ -1,7 +1,9 @@
-package com.example.testhub;
+package com.example.testhub.domain.testrun;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+
+import com.example.testhub.domain.testcase.TestCaseVersionId;
 
 public class TestRun {
 

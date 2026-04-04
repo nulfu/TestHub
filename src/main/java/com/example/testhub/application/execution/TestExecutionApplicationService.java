@@ -1,11 +1,15 @@
-package com.example.testhub;
+package com.example.testhub.application.execution;
 
 import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Service;
 
-import com.example.testhub.domain.repository.ReleaseRepository;
-import com.example.testhub.domain.repository.TestRunRepository;
+import com.example.testhub.domain.release.Release;
+import com.example.testhub.domain.release.ReleaseRepository;
+import com.example.testhub.domain.testcase.TestCaseVersionId;
+import com.example.testhub.domain.testrun.Result;
+import com.example.testhub.domain.testrun.TestRun;
+import com.example.testhub.domain.testrun.TestRunRepository;
 
 @Service
 public class TestExecutionApplicationService {

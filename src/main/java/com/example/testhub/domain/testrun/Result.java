@@ -1,4 +1,4 @@
-package com.example.testhub;
+package com.example.testhub.domain.testrun;
 
 public enum Result {
 

@@ -1,4 +1,4 @@
-package com.example.testhub.infrastructure.mapper;
+package com.example.testhub.infrastructure.jpa.mapper;
 
 import com.example.testhub.domain.*;
 import com.example.testhub.infrastructure.jpa.entity.*;

@@ -1,8 +1,9 @@
 package com.example.testhub.infrastructure.jpa.repository;
 
-import com.example.testhub.Release;
-import com.example.testhub.domain.ReleaseId;
-import com.example.testhub.domain.repository.ReleaseRepository;
+import com.example.testhub.domain.release.Release;
+import com.example.testhub.domain.release.ReleaseId;
+import com.example.testhub.domain.release.ReleaseRepository;
+
 import org.springframework.stereotype.Repository;
 
 @Repository

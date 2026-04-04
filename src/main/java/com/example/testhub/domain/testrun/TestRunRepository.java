@@ -1,6 +1,4 @@
-package com.example.testhub.domain.repository;
-
-import com.example.testhub.TestRun;
+package com.example.testhub.domain.testrun;
 
 public interface TestRunRepository {
 

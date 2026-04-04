@@ -1,4 +1,4 @@
-package com.example.testhub;
+package com.example.testhub.domain.testcase;
 
 import java.util.Objects;
 import java.util.UUID;
