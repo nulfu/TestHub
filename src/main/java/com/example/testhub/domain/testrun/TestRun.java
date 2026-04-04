@@ -31,6 +31,10 @@ public class TestRun {
         this.executedAt = executedAt;
     }
 
+    public TestRunId getId(){
+        return id;
+    }
+
     public ReleaseId getReleaseId(){
         return releaseId;
     }

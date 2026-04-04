@@ -47,8 +47,7 @@ public class TestExecutionApplicationService {
 
         release.recordExecution(
             versionId,
-            result,
-            now
+            result
         );
 
         releaseRepository.save(release);

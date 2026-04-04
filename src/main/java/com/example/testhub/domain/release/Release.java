@@ -1,13 +1,15 @@
-
 package com.example.testhub.domain.release;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.testhub.domain.project.ProjectId;
 import com.example.testhub.domain.testcase.TestCaseVersionId;
 import com.example.testhub.domain.testrun.Result;
 
 public class Release {
 
+    private final ReleaseId id;
     private final ProjectId projectId;
     private final String name;
 
@@ -25,6 +27,10 @@ public class Release {
 
     public ReleaseId getId() {
         return id;
+    }
+
+    public ProjectId getProjectId() {
+        return projectId;
     }
 
     public String getName() {
@@ -58,23 +64,23 @@ public class Release {
 
         return (getCompletedCases() * 100) / cases.size();
     }
-    
+
     public void recordExecution(
-     TestCaseVersionId versionId,
-     Result result
+        TestCaseVersionId versionId,
+        Result result
     ) {
 
-     for (ReleaseCase c : cases) {
+        for (ReleaseCase c : cases) {
 
-           if (c.isFor(versionId)) {
-              c.recordExecution(result);
+            if (c.isFor(versionId)) {
+                c.recordExecution(result);
                 return;
-         }
+            }
 
         }
 
-     throw new IllegalArgumentException(
-        "TestCaseVersion not found in release"
+        throw new IllegalArgumentException(
+            "TestCaseVersion not found in release"
         );
     }
 }

@@ -1,6 +1,8 @@
 package com.example.testhub.infrastructure.jpa.mapper;
 
 import com.example.testhub.domain.release.*;
+import com.example.testhub.domain.project.ProjectId;
+import com.example.testhub.domain.testcase.TestCaseVersionId;
 import com.example.testhub.infrastructure.jpa.entity.*;
 
 import org.springframework.stereotype.Component;
@@ -12,7 +14,8 @@ public class ReleaseMapper {
 
         Release release = new Release(
             new ReleaseId(entity.getId()),
-            new ProjectId(entity.getProjectId())
+            new ProjectId(entity.getProjectId()),
+            entity.getName()
         );
 
         entity.getCases()
@@ -31,7 +34,8 @@ public class ReleaseMapper {
 
         ReleaseEntity entity = new ReleaseEntity(
             domain.getId().getValue(),
-            domain.getProjectId().getValue()
+            domain.getProjectId().getValue(),
+            domain.getName()
         );
 
         domain.getCases()

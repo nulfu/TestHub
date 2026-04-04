@@ -1,5 +1,10 @@
 package com.example.testhub.infrastructure.jpa.repository;
 
-public interface SpringDataReleaseRepository
-    extends JpaRepository<ReleaseEntity, UUID> {
+import com.example.testhub.infrastructure.jpa.entity.ReleaseEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.UUID;
+
+public interface SpringDataReleaseRepository 
+        extends JpaRepository<ReleaseEntity, UUID> {
 }

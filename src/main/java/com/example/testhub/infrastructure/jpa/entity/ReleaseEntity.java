@@ -13,6 +13,9 @@ public class ReleaseEntity {
     @Column(name = "project_id", nullable = false)
     private UUID projectId;
 
+    @Column(name = "name", nullable = false)
+    private String name;
+
     @OneToMany(
         mappedBy = "release",
         cascade = CascadeType.ALL,
@@ -23,9 +26,10 @@ public class ReleaseEntity {
 
     protected ReleaseEntity() {}
 
-    public ReleaseEntity(UUID id, UUID projectId) {
+    public ReleaseEntity(UUID id, UUID projectId, String name) {
         this.id = id;
         this.projectId = projectId;
+        this.name = name;
     }
 
     public UUID getId() {
@@ -34,6 +38,10 @@ public class ReleaseEntity {
 
     public UUID getProjectId() {
         return projectId;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public List<ReleaseCaseEntity> getCases() {
