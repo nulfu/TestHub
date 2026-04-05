@@ -1,4 +1,4 @@
-package com.example.testhub.application.execution;
+package com.example.testhub.application.service;
 
 import com.example.testhub.domain.release.*;
 import com.example.testhub.domain.testrun.*;
