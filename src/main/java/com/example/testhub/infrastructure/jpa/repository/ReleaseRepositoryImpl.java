@@ -1,36 +1,39 @@
 package com.example.testhub.infrastructure.jpa.repository;
 
-import com.example.testhub.domain.release.Release;
-import com.example.testhub.domain.release.ReleaseId;
-import com.example.testhub.domain.release.ReleaseRepository;
+import com.example.testhub.domain.release.*;
+import com.example.testhub.infrastructure.jpa.mapper.ReleaseMapper;
+import com.example.testhub.infrastructure.jpa.entity.ReleaseEntity;
 
 import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 
 @Repository
 public class ReleaseRepositoryImpl implements ReleaseRepository {
 
-    private final JpaReleaseRepository jpaRepository;
+    private final SpringDataReleaseRepository repository;
     private final ReleaseMapper mapper;
 
     public ReleaseRepositoryImpl(
-        JpaReleaseRepository jpaRepository,
+        SpringDataReleaseRepository repository,
         ReleaseMapper mapper
-    ){
-        this.jpaRepository = jpaRepository;
+    ) {
+        this.repository = repository;
         this.mapper = mapper;
     }
 
     @Override
-    public Release find(ReleaseId id){
+    public Optional<Release> findById(ReleaseId id) {
 
-        return jpaRepository.findById(id.getValue())
-            .map(mapper::toDomain)
-            .orElseThrow();
+        return repository.findById(id.getValue())
+                .map(mapper::toDomain);
     }
 
     @Override
-    public void save(Release release){
+    public void save(Release release) {
 
-        jpaRepository.save(mapper.toEntity(release));
+        ReleaseEntity entity = mapper.toEntity(release);
+
+        repository.save(entity);
     }
 }
