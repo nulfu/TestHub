@@ -1,0 +1,19 @@
+<h1>Test Execution</h1>
+
+<table>
+<tr>
+  <th>TestCase</th>
+  <th>Result</th>
+  <th>Execute</th>
+</tr>
+
+<tr th:each="case : ${cases}">
+  <td th:text="${case.name}"></td>
+  <td th:text="${case.result}"></td>
+  <td>
+    <button th:onclick="'runTest(' + ${case.versionId} + ')'">
+      Run
+    </button>
+  </td>
+</tr>
+</table>

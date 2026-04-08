@@ -1,0 +1,9 @@
+<h1>Release Progress</h1>
+
+<p>Total: <span th:text="${progress.total}"></span></p>
+<p>Completed: <span th:text="${progress.completed}"></span></p>
+<p>Progress: <span th:text="${progress.percentage}"></span>%</p>
+
+<div style="width:300px;background:#eee;">
+  <div th:style="'width:' + ${progress.percentage} + '%;background:green;height:20px'"></div>
+</div>
