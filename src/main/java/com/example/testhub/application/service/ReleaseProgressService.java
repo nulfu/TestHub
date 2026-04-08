@@ -5,8 +5,9 @@ import com.example.testhub.domain.release.Release;
 import com.example.testhub.domain.release.ReleaseId;
 import com.example.testhub.domain.release.ReleaseRepository;
 
-import java.util.UUID;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ReleaseProgressService {
 
     private final ReleaseRepository releaseRepository;
@@ -15,25 +16,21 @@ public class ReleaseProgressService {
         this.releaseRepository = releaseRepository;
     }
 
-    public ReleaseProgressDto getProgress(UUID releaseId) {
+    public ReleaseProgressDto getProgress(ReleaseId releaseId) {
 
-        Release release = releaseRepository.findById(new ReleaseId(releaseId))
-                .orElseThrow(() -> new IllegalArgumentException("Release not found"));
+        Release release = releaseRepository
+                .findById(releaseId)
+                .orElseThrow(() -> new RuntimeException("Release not found"));
 
-        int total = release.getCases().size();
-
-        int passed = (int) release.getCases()
-                .stream()
-                .filter(c -> c.isCompleted())
-                .count();
-
-        int remaining = total - passed;
+        int total = release.getTotalCases();
+        int completed = release.getCompletedCases();
+        int percentage = release.getProgressPercentage();
 
         return new ReleaseProgressDto(
-                releaseId,
+                release.getId().getValue(),
                 total,
-                passed,
-                remaining
+                completed,
+                percentage
         );
     }
 }
