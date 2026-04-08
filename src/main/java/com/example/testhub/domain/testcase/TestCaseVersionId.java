@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class TestCaseVersionId {
-    
+
     private final UUID value;
 
     public TestCaseVersionId(UUID value) {
@@ -14,6 +14,10 @@ public class TestCaseVersionId {
         }
 
         this.value = value;
+    }
+
+    public static TestCaseVersionId newId() {
+        return new TestCaseVersionId(UUID.randomUUID());
     }
 
     public UUID getValue() {

@@ -1,29 +1,26 @@
 package com.example.testhub.application.service;
 
 import com.example.testhub.domain.project.ProjectId;
-import com.example.testhub.domain.testcase.TestCase;
-import com.example.testhub.domain.testcase.TestCaseId;
-import com.example.testhub.domain.testcase.TestCaseRepository;
+import com.example.testhub.domain.testcase.*;
 
-import java.util.UUID;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
+
+@Service
 public class TestCaseManagementService {
 
-    private final TestCaseRepository testCaseRepository;
+    private final TestCaseRepository repository;
 
-    public TestCaseManagementService(TestCaseRepository testCaseRepository) {
-        this.testCaseRepository = testCaseRepository;
+    public TestCaseManagementService(TestCaseRepository repository) {
+        this.repository = repository;
     }
 
-    public UUID createTestCase(UUID projectId) {
+    public void createTestCase(TestCase testCase) {
+        repository.save(testCase);
+    }
 
-        TestCase testCase = new TestCase(
-                new TestCaseId(),
-                new ProjectId(projectId)
-        );
-
-        testCaseRepository.save(testCase);
-
-        return UUID.fromString(testCase.getId().getValue());
+    public List<TestCase> findByProject(ProjectId projectId) {
+        return repository.findByProject(projectId);
     }
 }

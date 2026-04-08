@@ -5,20 +5,22 @@ import java.util.UUID;
 
 public class TestCaseId {
 
-    private final String value;
+    private final UUID value;
 
-    public TestCaseId() {
-        this.value = UUID.randomUUID().toString();
-    }
+    public TestCaseId(UUID value) {
 
-    public TestCaseId(String value) {
         if (value == null) {
             throw new IllegalArgumentException("TestCaseId must not be null");
         }
+
         this.value = value;
     }
 
-    public String getValue() {
+    public static TestCaseId newId() {
+        return new TestCaseId(UUID.randomUUID());
+    }
+
+    public UUID getValue() {
         return value;
     }
 

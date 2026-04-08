@@ -3,6 +3,7 @@ package com.example.testhub.domain.testcase;
 import com.example.testhub.domain.project.ProjectId;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TestCase {
@@ -12,7 +13,10 @@ public class TestCase {
 
     private final List<TestCaseVersion> versions = new ArrayList<>();
 
-    public TestCase(TestCaseId id, ProjectId projectId) {
+    public TestCase(
+            TestCaseId id,
+            ProjectId projectId
+    ) {
 
         if (id == null) {
             throw new IllegalArgumentException("testCaseId must not be null");
@@ -35,17 +39,24 @@ public class TestCase {
     }
 
     public List<TestCaseVersion> getVersions() {
-        return versions;
+        return Collections.unmodifiableList(versions);
     }
 
     public TestCaseVersion latestVersion() {
+
         if (versions.isEmpty()) {
             throw new IllegalStateException("No version exists");
         }
+
         return versions.get(versions.size() - 1);
     }
 
     public void addVersion(TestCaseVersion version) {
+
+        if (version == null) {
+            throw new IllegalArgumentException("version must not be null");
+        }
+
         versions.add(version);
     }
 }
