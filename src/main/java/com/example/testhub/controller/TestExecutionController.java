@@ -1,27 +1,36 @@
 package com.example.testhub.controller;
 
-import com.example.testhub.application.dto.ExecuteTestRequest;
-import com.example.testhub.application.dto.TestRunDto;
 import com.example.testhub.application.service.TestExecutionApplicationService;
-import org.springframework.web.bind.annotation.*;
+import com.example.testhub.application.dto.ExecuteTestRequest;
 
-@RestController
-@RequestMapping("/test-executions")
+import com.example.testhub.domain.release.ReleaseId;
+import com.example.testhub.domain.testcase.TestCaseVersionId;
+import com.example.testhub.domain.testrun.Result;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+
+
+@Controller
 public class TestExecutionController {
 
-    private final TestExecutionApplicationService executionService;
+    private final TestExecutionApplicationService service;
 
     public TestExecutionController(
-            TestExecutionApplicationService executionService
+        TestExecutionApplicationService service
     ) {
-        this.executionService = executionService;
+        this.service = service;
     }
 
-    @PostMapping
-    public TestRunDto executeTest(
-            @RequestBody ExecuteTestRequest request
-    ) {
+    @PostMapping("/ui/test/execute")
+    public String execute(ExecuteTestRequest request) {
 
-        return executionService.execute(request);
+        service.execute(
+                new ReleaseId(request.getReleaseId()),
+                new TestCaseVersionId(request.getTestCaseVersionId()),
+                Result.valueOf(request.getResult())
+        );
+
+        return "redirect:/ui/dashboard?releaseId=" + request.getReleaseId();
     }
 }

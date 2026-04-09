@@ -13,5 +13,7 @@ public interface TestCaseRepository {
 
     List<TestCase> findByProjectId(ProjectId projectId);
 
+    List<TestCase> findByProject(ProjectId projectId);
+
     void delete(TestCaseId id);
 }
