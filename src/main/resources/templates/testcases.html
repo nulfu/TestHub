@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Test Execution</title>
+</head>
+
+<body>
+
+<h1>Test Execution</h1>
+
+<table border="1">
+
+<tr>
+<th>TestCase</th>
+<th>Execute</th>
+</tr>
+
+<tr th:each="test : ${tests}">
+
+<td th:text="${test.title}"></td>
+
+<td>
+
+<form action="/ui/test/execute" method="post">
+
+<input type="hidden"
+       name="releaseId"
+       th:value="${test.releaseId}" />
+
+<input type="hidden"
+       name="versionId"
+       th:value="${test.versionId}" />
+
+<button type="submit" name="result" value="PASS">
+PASS
+</button>
+
+<button type="submit" name="result" value="FAIL">
+FAIL
+</button>
+
+</form>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+</html>

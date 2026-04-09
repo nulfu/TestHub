@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Test Execution</title>
+</head>
+
+<body>
+
+<h1>Test Execution</h1>
+
+<form method="post" action="/ui/test-execution">
+
+    <div>
+        Release ID
+        <input type="text" name="releaseId"/>
+    </div>
+
+    <div>
+        Version ID
+        <input type="text" name="versionId"/>
+    </div>
+
+    <div>
+        Result
+        <select name="result">
+            <option value="PASS">PASS</option>
+            <option value="FAIL">FAIL</option>
+        </select>
+    </div>
+
+    <button type="submit">
+        Execute Test
+    </button>
+
+</form>
+
+</body>
+</html>

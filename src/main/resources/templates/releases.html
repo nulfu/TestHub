@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Releases</title>
+</head>
+
+<body>
+
+<h1>Release List</h1>
+
+<table border="1">
+
+<tr>
+<th>Name</th>
+<th>Open</th>
+</tr>
+
+<tr th:each="release : ${releases}">
+
+<td th:text="${release.name}"></td>
+
+<td>
+<a th:href="@{/ui/dashboard(releaseId=${release.id.value})}">
+Open
+</a>
+</td>
+
+</tr>
+
+</table>
+
+</body>
+</html>

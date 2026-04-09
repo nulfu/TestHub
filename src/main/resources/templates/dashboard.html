@@ -1,9 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Release Dashboard</title>
+</head>
+
+<body>
+
 <h1>Release Progress</h1>
 
-<p>Total: <span th:text="${progress.total}"></span></p>
-<p>Completed: <span th:text="${progress.completed}"></span></p>
-<p>Progress: <span th:text="${progress.percentage}"></span>%</p>
+<p>
+Total:
+<span th:text="${progress.total}"></span>
+</p>
 
-<div style="width:300px;background:#eee;">
-  <div th:style="'width:' + ${progress.percentage} + '%;background:green;height:20px'"></div>
+<p>
+Completed:
+<span th:text="${progress.completed}"></span>
+</p>
+
+<p>
+Progress:
+<span th:text="${progress.percentage}"></span>%
+</p>
+
+<div style="width:400px;background:#eee;border-radius:5px">
+
+    <div
+        th:style="'width:' + ${progress.percentage} + '%; background:green; height:20px; border-radius:5px'">
+    </div>
+
 </div>
+
+</body>
+</html>
