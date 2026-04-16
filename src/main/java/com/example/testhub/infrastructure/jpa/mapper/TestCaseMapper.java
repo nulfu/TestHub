@@ -3,7 +3,9 @@ package com.example.testhub.infrastructure.jpa.mapper;
 import com.example.testhub.domain.project.ProjectId;
 import com.example.testhub.domain.testcase.*;
 import com.example.testhub.infrastructure.jpa.entity.*;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TestCaseMapper {
 
     public TestCaseEntity toEntity(TestCase domain){

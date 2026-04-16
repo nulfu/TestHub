@@ -11,8 +11,6 @@ public interface TestCaseRepository {
 
     Optional<TestCase> findById(TestCaseId id);
 
-    List<TestCase> findByProjectId(ProjectId projectId);
-
     List<TestCase> findByProject(ProjectId projectId);
 
     void delete(TestCaseId id);

@@ -43,7 +43,7 @@ public class JpaTestCaseRepository implements TestCaseRepository {
     }
 
     @Override
-    public List<TestCase> findByProjectId(ProjectId projectId) {
+    public List<TestCase> findByProject(ProjectId projectId) {
 
         return repository
             .findByProjectId(projectId.getValue())
