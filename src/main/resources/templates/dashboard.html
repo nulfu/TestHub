@@ -1,36 +1,39 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<h1>Dashboard</h1>
 
-<head>
-<title>Release Dashboard</title>
-</head>
-
-<body>
-
-<h1>Release Progress</h1>
-
-<p>
-Total:
-<span th:text="${progress.total}"></span>
-</p>
-
-<p>
-Completed:
-<span th:text="${progress.completed}"></span>
-</p>
-
-<p>
-Progress:
-<span th:text="${progress.percentage}"></span>%
-</p>
-
-<div style="width:400px;background:#eee;border-radius:5px">
-
-    <div
-        th:style="'width:' + ${progress.percentage} + '%; background:green; height:20px; border-radius:5px'">
-    </div>
-
+<div>
+    <h3>Progress</h3>
+    <p>Total: <span th:text="${progress.total}"></span></p>
+    <p>Completed: <span th:text="${progress.completed}"></span></p>
+    <p>Progress: <span th:text="${progress.percentage}"></span>%</p>
 </div>
 
-</body>
-</html>
+<div style="width:400px;background:#eee;">
+    <div th:style="'width:' + ${progress.percentage} + '%;background:blue;height:20px;color:white;text-align:center;'">
+        <span th:text="${progress.percentage} + '%'"></span>
+    </div>
+</div>
+
+<h3>Result Summary</h3>
+<p style="color:green;">PASS: <span th:text="${passCount}"></span></p>
+<p style="color:red;">FAIL: <span th:text="${failCount}"></span></p>
+
+<h3>Details</h3>
+<table border="1">
+<tr>
+    <th>VersionId</th>
+    <th>Result</th>
+</tr>
+
+<tr th:each="c : ${cases}">
+    <td th:text="${c.versionId.value}"></td>
+    <td th:text="${c.latestResult}"
+        th:style="${c.latestResult} == 'PASS' ? 'color:green' :
+                  (${c.latestResult} == 'FAIL' ? 'color:red' : '')">
+    </td>
+</tr>
+</table>
+
+<br>
+<a th:href="'/ui/test-execution?releaseId=' + ${releaseId}">
+    → テスト実行
+</a>

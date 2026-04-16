@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
+    
 <head>
-<title>Releases</title>
+    <title>Releases</title>
 </head>
 
 <body>
 
-<h1>Release List</h1>
+<h1>Releases</h1>
 
 <table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Action</th>
+    </tr>
 
-<tr>
-<th>Name</th>
-<th>Open</th>
-</tr>
+    <tr th:each="r : ${releases}">
+        <td th:text="${r.name}">Release Name</td>
 
-<tr th:each="release : ${releases}">
+        <td>
+            <a th:href="'/ui/dashboard?releaseId=' + ${r.id.value}">
+                Dashboard
+            </a>
 
-<td th:text="${release.name}"></td>
-
-<td>
-<a th:href="@{/ui/dashboard(releaseId=${release.id.value})}">
-Open
-</a>
-</td>
-
-</tr>
+            |
+            
+            <a th:href="'/ui/test-execution?releaseId=' + ${r.id.value}">
+                Execute
+            </a>
+        </td>
+    </tr>
 
 </table>
 

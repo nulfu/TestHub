@@ -3,36 +3,41 @@
 <head>
     <title>Test Execution</title>
 </head>
-
 <body>
 
 <h1>Test Execution</h1>
 
-<form method="post" action="/ui/test-execution">
+<table border="1">
+<tr>
+    <th>VersionId</th>
+    <th>Status</th>
+    <th>Action</th>
+</tr>
 
-    <div>
-        Release ID
-        <input type="text" name="releaseId"/>
-    </div>
+<tr th:each="c : ${cases}">
+    <td th:text="${c.versionId.value}"></td>
 
-    <div>
-        Version ID
-        <input type="text" name="versionId"/>
-    </div>
+    <td th:text="${c.latestResult}"
+        th:style="${c.latestResult} == 'PASS' ? 'color:green' :
+                  (${c.latestResult} == 'FAIL' ? 'color:red' : '')">
+    </td>
 
-    <div>
-        Result
-        <select name="result">
-            <option value="PASS">PASS</option>
-            <option value="FAIL">FAIL</option>
-        </select>
-    </div>
+    <td>
+        <form method="post" action="/ui/test-execution">
+            <input type="hidden" name="releaseId" th:value="${releaseId}" />
+            <input type="hidden" name="versionId" th:value="${c.versionId.value}" />
 
-    <button type="submit">
-        Execute Test
-    </button>
+            <button name="result" value="PASS">PASS</button>
+            <button name="result" value="FAIL">FAIL</button>
+        </form>
+    </td>
+</tr>
+</table>
 
-</form>
+<br>
+<a th:href="'/ui/dashboard?releaseId=' + ${releaseId}">
+    → Dashboardへ
+</a>
 
 </body>
 </html>
