@@ -7,6 +7,9 @@ import com.example.testhub.infrastructure.jpa.mapper.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import java.util.List;
 
 @Repository
 public class JpaReleaseRepository implements ReleaseRepository {
@@ -27,6 +30,15 @@ public class JpaReleaseRepository implements ReleaseRepository {
 
         return repository.findById(id.getValue())
                 .map(mapper::toDomain);
+    }
+
+    @Override
+    public List<Release> findAll() {
+
+        return repository.findAll()
+            .stream()
+            .map(mapper::toDomain)
+            .collect(Collectors.toList());
     }
 
     @Override
