@@ -1,10 +1,14 @@
 package com.example.testhub.controller;
 
 import com.example.testhub.application.service.TestExecutionApplicationService;
-import com.example.testhub.application.dto.ExecuteTestRequest;
+import com.example.testhub.domain.release.Release;
+import com.example.testhub.domain.release.ReleaseId;
+import com.example.testhub.domain.release.ReleaseRepository;
+import com.example.testhub.domain.testcase.TestCaseVersionId;
+import com.example.testhub.domain.testrun.Result;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.ui.Model; // ← ★これ追加
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -14,15 +18,29 @@ import java.util.UUID;
 public class TestExecutionPageController {
 
     private final TestExecutionApplicationService service;
+    private final ReleaseRepository releaseRepository; // ← ★これ追加
 
     public TestExecutionPageController(
-        TestExecutionApplicationService service
+        TestExecutionApplicationService service,
+        ReleaseRepository releaseRepository // ← ★DI追加
     ){
         this.service = service;
+        this.releaseRepository = releaseRepository;
     }
 
     @GetMapping
-    public String page(){
+    public String page(
+        @RequestParam UUID releaseId,
+        Model model
+    ){
+
+        Release release = releaseRepository
+            .findById(new ReleaseId(releaseId))
+            .orElseThrow();
+
+        model.addAttribute("releaseId", releaseId);
+        model.addAttribute("cases", release.getCases());
+
         return "test-execution";
     }
 
@@ -33,13 +51,12 @@ public class TestExecutionPageController {
         @RequestParam String result
     ){
 
-        ExecuteTestRequest request = new ExecuteTestRequest();
-        request.setReleaseId(releaseId);
-        request.setVersionId(versionId);
-        request.setResult(result);
+        service.execute(
+            new ReleaseId(releaseId),
+            new TestCaseVersionId(versionId),
+            Result.valueOf(result)
+        );
 
-        service.execute(request);
-
-        return "redirect:/ui/test-execution";
+        return "redirect:/ui/test-execution?releaseId=" + releaseId;
     }
 }
