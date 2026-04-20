@@ -1,5 +1,6 @@
 package com.example.testhub.controller;
 
+import com.example.testhub.application.dto.ReleaseCaseViewDto;
 import com.example.testhub.application.service.ReleaseProgressService;
 import com.example.testhub.domain.release.*;
 
@@ -43,10 +44,30 @@ public class DashboardController {
         long fail = release.getCases().stream()
             .filter(c -> c.getLatestResult() != null && c.getLatestResult().isFail())
             .count();
+        var caseDtos = release.getCases().stream()
+             .map(c -> {
+                 var result = c.getLatestResult();
 
+                 String resultStr = result != null ? result.name() : "NOT_EXECUTED";
+
+                 String color = switch (resultStr) {
+                     case "PASS" -> "green";
+                     case "FAIL" -> "red";
+                     case "BLOCKED" -> "orange";
+                     default -> "gray";
+                 };
+
+                return new ReleaseCaseViewDto(
+                   c.getVersionId().getValue(),
+                   resultStr,
+                   color
+                 );
+            })
+            .toList();
+
+        model.addAttribute("cases", caseDtos);
         model.addAttribute("releaseId", releaseId);
         model.addAttribute("progress", progress);
-        model.addAttribute("cases", release.getCases());
         model.addAttribute("passCount", pass);
         model.addAttribute("failCount", fail);
 

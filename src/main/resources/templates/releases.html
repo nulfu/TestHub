@@ -19,13 +19,13 @@
         <td th:text="${r.name}">Release Name</td>
 
         <td>
-            <a th:href="'/ui/dashboard?releaseId=' + ${r.id.value}">
+            <a th:href="@{/ui/dashboard(releaseId=${r.releaseId})}">
                 Dashboard
             </a>
 
             |
             
-            <a th:href="'/ui/test-execution?releaseId=' + ${r.id.value}">
+            <a th:href="@{/ui/test-execution(releaseId=${r.releaseId})}">
                 Execute
             </a>
         </td>

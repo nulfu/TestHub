@@ -25,10 +25,10 @@
 </tr>
 
 <tr th:each="c : ${cases}">
-    <td th:text="${c.versionId.value}"></td>
-    <td th:text="${c.latestResult}"
-        th:style="${c.latestResult} == 'PASS' ? 'color:green' :
-                  (${c.latestResult} == 'FAIL' ? 'color:red' : '')">
+    <td th:text="${c.versionId}"></td>
+
+    <td th:text="${c.result}"
+        th:style="'color:' + ${c.color}">
     </td>
 </tr>
 </table>

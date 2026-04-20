@@ -8,7 +8,7 @@ import com.example.testhub.domain.testcase.TestCaseVersionId;
 import com.example.testhub.domain.testrun.Result;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model; // ← ★これ追加
+import org.springframework.ui.Model; 
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
