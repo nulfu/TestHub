@@ -18,11 +18,11 @@ import java.util.UUID;
 public class TestExecutionPageController {
 
     private final TestExecutionApplicationService service;
-    private final ReleaseRepository releaseRepository; // ← ★これ追加
+    private final ReleaseRepository releaseRepository; 
 
     public TestExecutionPageController(
         TestExecutionApplicationService service,
-        ReleaseRepository releaseRepository // ← ★DI追加
+        ReleaseRepository releaseRepository 
     ){
         this.service = service;
         this.releaseRepository = releaseRepository;
