@@ -6,17 +6,17 @@ public class ReleaseProgressDto {
 
     private UUID releaseId;
     private int totalCases;
-    private int passedCases;
-    private int remainingCases;
+    private int completedCases;
+    private int progressPercentage;
 
     public ReleaseProgressDto(UUID releaseId,
                               int totalCases,
-                              int passedCases,
-                              int remainingCases) {
+                              int completedCases,
+                              int progressPercentage) {
         this.releaseId = releaseId;
         this.totalCases = totalCases;
-        this.passedCases = passedCases;
-        this.remainingCases = remainingCases;
+        this.completedCases = completedCases;
+        this.progressPercentage = progressPercentage;
     }
 
     public UUID getReleaseId() {
@@ -27,11 +27,11 @@ public class ReleaseProgressDto {
         return totalCases;
     }
 
-    public int getPassedCases() {
-        return passedCases;
+    public int getCompletedCases() {
+        return completedCases;
     }
 
-    public int getRemainingCases() {
-        return remainingCases;
+    public int getProgressPercentage() {
+        return progressPercentage;
     }
 }
