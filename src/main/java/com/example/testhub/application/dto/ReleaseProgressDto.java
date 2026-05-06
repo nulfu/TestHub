@@ -7,6 +7,7 @@ public class ReleaseProgressDto {
     private final UUID releaseId;
     private final int totalCases;
     private final int completedCases;
+    private final int remainingCases;
 
     // 表示用（0〜100）
     private final int percentage;
@@ -24,6 +25,7 @@ public class ReleaseProgressDto {
         this.releaseId = releaseId;
         this.totalCases = totalCases;
         this.completedCases = completedCases;
+        this.remainingCases = totalCases - completedCases;
         this.percentage = percentage;
         this.ratio = ratio;
     }
@@ -38,6 +40,10 @@ public class ReleaseProgressDto {
 
     public int getCompletedCases() {
         return completedCases;
+    }
+
+    public int getRemainingCases() {
+        return remainingCases;
     }
 
     public int getPercentage() {
