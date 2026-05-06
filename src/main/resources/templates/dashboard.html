@@ -3,14 +3,12 @@
 <div>
     <h3>Progress</h3>
     <p>Total: <span th:text="${dashboard.progress.totalCases}"></span></p>
-    <p>Completed: <span th:text="${dashboard.progress.passedCases}"></span></p>
+    <p>Completed: <span th:text="${dashboard.progress.completedCases}"></span></p>
     <p>Remaining: <span th:text="${dashboard.progress.remainingCases}"></span></p>
 </div>
 
-<div style="width:400px;background:#eee;">
-    <div th:style="'width:' + ${dashboard.progress.remainingCases} + '%;background:blue;height:20px;color:white;text-align:center;'">
-        <span th:text="${dashboard.progress.remainingCases} + '%'"></span>
-    </div>
+<div th:style="'width:' + ${dashboard.progress.percentage} + '%;background:blue;height:20px;color:white;text-align:center;'">
+    <span th:text="${dashboard.progress.percentage} + '%'"></span>
 </div>
 
 <h3>Result Summary</h3>
