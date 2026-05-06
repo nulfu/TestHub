@@ -24,7 +24,7 @@ public class ReleaseProgressService {
 
         int total = release.getTotalCases();
         int completed = release.getCompletedCases();
-        int percentage = release.getProgressPercentage();
+        double percentage = release.getProgressPercentage();
 
         return new ReleaseProgressDto(
                 release.getId().getValue(),
