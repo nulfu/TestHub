@@ -57,6 +57,7 @@ public class DashboardService {
                 .toList();
 
         return new DashboardDto(
+                release.getId().getValue(),
                 progress,
                 passCount,
                 failCount,
