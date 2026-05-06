@@ -24,13 +24,15 @@ public class ReleaseProgressService {
 
         int total = release.getTotalCases();
         int completed = release.getCompletedCases();
-        double percentage = release.getProgressPercentage();
+        double ratio = release.getProgressRatio();
+        int percentage = (int) (ratio * 100);
 
         return new ReleaseProgressDto(
-                release.getId().getValue(),
-                total,
-                completed,
-                percentage
+            release.getId().getValue(),
+            total,
+            completed,
+            percentage,
+            ratio
         );
     }
 }

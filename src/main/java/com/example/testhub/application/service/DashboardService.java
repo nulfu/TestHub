@@ -31,13 +31,15 @@ public class DashboardService {
         // ===== Progress =====
         int total = release.getTotalCases();
         int completed = release.getCompletedCases();
-        int percentage = release.getProgressPercentage();
+        double ratio = release.getProgressRatio();
+        int percentage = (int) (ratio * 100);
 
         ReleaseProgressDto progress = new ReleaseProgressDto(
                 release.getId().getValue(),
                 total,
                 completed,
-                percentage
+                percentage,
+                ratio
         );
 
         // ===== Pass / Fail 集計 =====

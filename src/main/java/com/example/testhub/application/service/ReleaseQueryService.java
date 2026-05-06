@@ -19,14 +19,20 @@ public class ReleaseQueryService {
 
     public List<ReleaseSummaryDto> findAllSummaries() {
 
-        List<Release> releases = releaseRepository.findAll();
+    List<Release> releases = releaseRepository.findAll();
 
-        return releases.stream()
-            .map(r -> new ReleaseSummaryDto(
+    return releases.stream()
+        .map(r -> {
+
+            double ratio = r.getProgressRatio();
+            int percentage = (int) (ratio * 100);
+
+            return new ReleaseSummaryDto(
                 r.getId().getValue(),
                 r.getName(),
-                r.getProgressPercentage()
-            ))
-            .toList();
+                percentage
+            );
+        })
+        .toList();
     }
 }

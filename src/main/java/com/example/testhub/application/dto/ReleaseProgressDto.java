@@ -4,19 +4,28 @@ import java.util.UUID;
 
 public class ReleaseProgressDto {
 
-    private UUID releaseId;
-    private int totalCases;
-    private int completedCases;
-    private double progressPercentage;
+    private final UUID releaseId;
+    private final int totalCases;
+    private final int completedCases;
 
-    public ReleaseProgressDto(UUID releaseId,
-                              int totalCases,
-                              int completedCases,
-                              double progressPercentage) {
+    // 表示用（0〜100）
+    private final int percentage;
+
+    // 計算用（0.0〜1.0）
+    private final double ratio;
+
+    public ReleaseProgressDto(
+            UUID releaseId,
+            int totalCases,
+            int completedCases,
+            int percentage,
+            double ratio
+    ) {
         this.releaseId = releaseId;
         this.totalCases = totalCases;
         this.completedCases = completedCases;
-        this.progressPercentage = progressPercentage;
+        this.percentage = percentage;
+        this.ratio = ratio;
     }
 
     public UUID getReleaseId() {
@@ -31,7 +40,11 @@ public class ReleaseProgressDto {
         return completedCases;
     }
 
-    public double getProgressPercentage() {
-        return progressPercentage;
+    public int getPercentage() {
+        return percentage;
+    }
+
+    public double getRatio() {
+        return ratio;
     }
 }

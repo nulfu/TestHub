@@ -20,6 +20,10 @@ public class Release {
         ProjectId projectId,
         String name
     ) {
+        if (id == null) throw new IllegalArgumentException("id is null");
+        if (projectId == null) throw new IllegalArgumentException("projectId is null");
+        if (name == null || name.isBlank()) throw new IllegalArgumentException("name is empty");
+
         this.id = id;
         this.projectId = projectId;
         this.name = name;
@@ -38,49 +42,84 @@ public class Release {
     }
 
     public List<ReleaseCase> getCases() {
-        return cases;
+        return new ArrayList<>(cases); // defensive copy
     }
 
+    // ------------------------
+    // ケース管理
+    // ------------------------
+
     public void addCase(ReleaseCase releaseCase) {
+
+        if (releaseCase == null) {
+            throw new IllegalArgumentException("releaseCase is null");
+        }
+
+        // 重複防止（重要）
+        boolean exists = cases.stream()
+            .anyMatch(c -> c.isFor(releaseCase.getVersionId()));
+
+        if (exists) {
+            throw new IllegalArgumentException("Duplicate TestCaseVersion");
+        }
+
         cases.add(releaseCase);
     }
 
-    public int getTotalCases() {
-        return cases.size();
-    }
-
-    public int getCompletedCases() {
-
-        return (int) cases.stream()
-            .filter(ReleaseCase::isCompleted)
-            .count();
-    }
-
-    public int getProgressPercentage() {
-
-        if (cases.isEmpty()) {
-            return 0;
-        }
-
-        return (getCompletedCases() * 100) / cases.size();
-    }
+    // ------------------------
+    // 実行結果
+    // ------------------------
 
     public void recordExecution(
         TestCaseVersionId versionId,
         Result result
     ) {
 
-        for (ReleaseCase c : cases) {
-
-            if (c.isFor(versionId)) {
-                c.recordExecution(result);
-                return;
-            }
-
+        if (versionId == null) {
+            throw new IllegalArgumentException("versionId is null");
         }
 
-        throw new IllegalArgumentException(
-            "TestCaseVersion not found in release"
-        );
+        if (result == null) {
+            throw new IllegalArgumentException("result is null");
+        }
+
+        ReleaseCase target = cases.stream()
+            .filter(c -> c.isFor(versionId))
+            .findFirst()
+            .orElseThrow(() ->
+                new IllegalArgumentException("TestCaseVersion not found in release")
+            );
+
+        target.recordExecution(result);
+    }
+
+    // ------------------------
+    // 進捗
+    // ------------------------
+
+    public int getTotalCases() {
+        return cases.size();
+    }
+
+    public int getCompletedCases() {
+        return (int) cases.stream()
+            .filter(ReleaseCase::isCompleted)
+            .count();
+    }
+
+    /**
+     * 進捗割合（0.0〜1.0）
+     */
+    public double getProgressRatio() {
+
+        if (cases.isEmpty()) {
+            return 0.0;
+        }
+
+        long completed = cases.stream()
+            .filter(ReleaseCase::isCompleted)
+            .count();
+
+        return (double) completed / cases.size();
     }
 }
